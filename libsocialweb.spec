@@ -52,7 +52,11 @@ Keys allowing access to various web services through libsocialweb.
 chmod 644 examples/*.py 
 
 %build
-%configure --with-gnome --with-online=networkmanager --disable-static --enable-all-services
+%configure2_5x \
+  --with-gnome \
+  --with-online=networkmanager \
+  --disable-static \
+  --enable-all-services
 
 # Remove rpath as per https://fedoraproject.org/wiki/Packaging/Guidelines#Beware_of_Rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
