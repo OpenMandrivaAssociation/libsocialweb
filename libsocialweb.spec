@@ -8,7 +8,7 @@
 
 Name:		libsocialweb
 Version:	0.25.20
-Release:	1
+Release:	2
 License:	LGPLv2.1
 Summary:	A personal social data server
 Group:		System/Libraries
@@ -16,7 +16,7 @@ Url:		http://git.gnome.org/browse/libsocialweb/
 Source0:	http://download.gnome.org/sources/libsocialweb/0.25/%{name}-%{version}.tar.xz
 
 BuildRequires:  intltool
-#BuildRequires:  vala
+BuildRequires:  vala
 BuildRequires:  xsltproc
 BuildRequires:  pkgconfig(dbus-glib-1)
 BuildRequires:  pkgconfig(gconf-2.0)
@@ -76,9 +76,8 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 	--disable-static \
 	--with-gnome \
 	--with-online=networkmanager \
-    --enable-all-services
-
-#	--enable-vala-bindings
+	--enable-vala-bindings \
+	--enable-all-services
 
 %make
 
@@ -151,10 +150,10 @@ mkdir %{buildroot}%{_datadir}/libsocialweb/keys
 %{_libdir}/pkgconfig/libsocialweb-keystore.pc
 %{_libdir}/pkgconfig/libsocialweb-module.pc
 %{_datadir}/gir-1.0/SocialWebClient-0.25.gir
-#dir %{_datadir}/vala
-#dir %{_datadir}/vala/vapi
-#{_datadir}/vala/vapi/*.deps
-#{_datadir}/vala/vapi/*.vapi
+%dir %{_datadir}/vala
+%dir %{_datadir}/vala/vapi
+%{_datadir}/vala/vapi/*.deps
+%{_datadir}/vala/vapi/*.vapi
 %doc %{_datadir}/gtk-doc/html/libsocialweb/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-dbus/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-client/
