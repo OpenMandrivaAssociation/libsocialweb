@@ -16,7 +16,7 @@ Url:		http://git.gnome.org/browse/libsocialweb/
 Source0:	http://download.gnome.org/sources/libsocialweb/0.25/%{name}-%{version}.tar.xz
 
 BuildRequires:  intltool
-BuildRequires:  vala
+BuildRequires:  vala-tools
 BuildRequires:  xsltproc
 BuildRequires:  pkgconfig(dbus-glib-1)
 BuildRequires:  pkgconfig(gconf-2.0)
