@@ -14,55 +14,56 @@ Summary:	A personal social data server
 Group:		System/Libraries
 Url:		http://git.gnome.org/browse/libsocialweb/
 Source0:	http://download.gnome.org/sources/libsocialweb/0.25/%{name}-%{version}.tar.xz
+Patch0:		libsocialweb-0.25.20-linkage.patch
 
-BuildRequires:  intltool
-BuildRequires:  vala-tools
-BuildRequires:  xsltproc
-BuildRequires:  pkgconfig(dbus-glib-1)
-BuildRequires:  pkgconfig(gconf-2.0)
-BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(gobject-introspection-1.0)
-BuildRequires:  pkgconfig(gnome-keyring-1)
-BuildRequires:  pkgconfig(json-glib-1.0)
-BuildRequires:  pkgconfig(libnm-glib)
-BuildRequires:  pkgconfig(libsoup-2.4)
-BuildRequires:  pkgconfig(rest-extras-0.7)
+BuildRequires:	intltool
+BuildRequires:	vala-tools
+BuildRequires:	xsltproc
+BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(json-glib-1.0)
+BuildRequires:	pkgconfig(libnm-glib)
+BuildRequires:	pkgconfig(libsoup-2.4)
+BuildRequires:	pkgconfig(rest-extras-0.7)
 
 %description
 Libsocialweb is a personal social data server, that can interact with
 social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %package -n %{libname}
-Summary:        A personal social data server -- Library for Services
-License:        LGPLv2.1
-Group:          System/Libraries
+Summary:	A personal social data server -- Library for Services
+License:	LGPLv2.1
+Group:		System/Libraries
 
 %description -n %{libname}
 This package contains libraries used by libsocialweb services.
 
 %package -n %{libclient}
-Summary:        A personal social data server -- Client Library
-License:        LGPLv2.1
-Group:          System/Libraries
+Summary:	A personal social data server -- Client Library
+License:	LGPLv2.1
+Group:		System/Libraries
 
 %description -n %{libclient}
 This package contains libraries used by clients willing to use
 libsocialweb features.
 
 %package -n %{girclient}
-Summary:    GObject Introspection interface description for %{name}-client
-Group:      System/Libraries
-Requires:   %{libclient} = %{version}-%{release}
+Summary:	GObject Introspection interface description for %{name}-client
+Group:		System/Libraries
+Requires:	%{libclient} = %{version}-%{release}
 
 %description -n %{girclient}
 GObject Introspection interface description for %{name}-client.
 
 %package -n %{develname}
-Summary:        A personal social data server -- Development Files
-License:        LGPLv2.1
-Group:          Development/C
-Requires:       %{libname} = %{version}-%{release}
-Requires:       %{libclient} = %{version}-%{release}
+Summary:	A personal social data server -- Development Files
+License:	LGPLv2.1
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libclient} = %{version}-%{release}
 
 %description -n %{develname}
 Libsocialweb is a personal social data server, that can interact with
@@ -70,8 +71,10 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+autoreconf -fi
 %configure2_5x \
 	--disable-static \
 	--with-gnome \
@@ -83,7 +86,6 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %install
 %makeinstall_std
-find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
 %find_lang %{name}
 
 # Create directory where API keys will be stored
@@ -157,4 +159,21 @@ mkdir %{buildroot}%{_datadir}/libsocialweb/keys
 %doc %{_datadir}/gtk-doc/html/libsocialweb/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-dbus/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-client/
+
+
+
+%changelog
+* Fri Dec 09 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.25.20-2
++ Revision: 739236
+- vala-tools needed
+- rebuild
+- enabling vala build needed for folks
+
+* Wed Dec 07 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.25.20-1
++ Revision: 738746
+- imported package libsocialweb
+
+  + Claudio Matsuoka <claudio@mandriva.com>
+    - update configure macro
+    - imported package libsocialweb
 
