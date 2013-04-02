@@ -7,8 +7,8 @@
 %define	develname %mklibname socialweb -d
 
 Name:		libsocialweb
-Version:	0.25.20
-Release:	2
+Version:	0.25.21
+Release:	1
 License:	LGPLv2.1
 Summary:	A personal social data server
 Group:		System/Libraries
