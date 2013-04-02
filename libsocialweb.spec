@@ -15,6 +15,7 @@ Group:		System/Libraries
 Url:		http://git.gnome.org/browse/libsocialweb/
 Source0:	http://download.gnome.org/sources/libsocialweb/0.25/%{name}-%{version}.tar.xz
 Patch0:		libsocialweb-0.25.20-linkage.patch
+Patch1:		libsocialweb-0.25.21-strfmt.patch
 
 BuildRequires:	intltool
 BuildRequires:	vala-tools
@@ -72,6 +73,7 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 %build
 autoreconf -fi

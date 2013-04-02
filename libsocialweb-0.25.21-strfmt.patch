@@ -1,0 +1,11 @@
+--- libsocialweb-client/sw-client-service.c.orig	2013-04-02 16:55:43.633960612 +0100
++++ libsocialweb-client/sw-client-service.c	2013-04-02 16:55:52.424960098 +0100
+@@ -594,7 +594,7 @@
+                                          (GAsyncReadyCallback) closure->cb,
+                                          closure->userdata,
+                                          SW_CLIENT_SERVICE_ERROR,
+-                                         0,
++                                         0, "%s",
+                                          error_message);
+     g_object_unref (closure->service);
+     g_slice_free (SwClientServiceCallClosure, closure);
