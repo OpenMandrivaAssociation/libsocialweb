@@ -1,19 +1,23 @@
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
 %define	major 0
 %define	client_major 2
-%define	gir_major 0.25
+%define	gimajor 0.25
 %define	libname %mklibname socialweb %{major}
+%define libkeyfob %mklibname socialweb-keyfob %{major}
+%define libkeystore %mklibname socialweb-keystore %{major}
 %define	libclient %mklibname socialweb-client %{client_major}
-%define	girclient %mklibname socialweb-client-gir %{gir_major}
-%define	develname %mklibname socialweb -d
+%define	girclient %mklibname socialweb-client-gir %{gimajor}
+%define	devname %mklibname socialweb -d
 
+Summary:	A personal social data server
 Name:		libsocialweb
 Version:	0.25.21
-Release:	1
+Release:	2
 License:	LGPLv2.1
-Summary:	A personal social data server
 Group:		System/Libraries
 Url:		http://git.gnome.org/browse/libsocialweb/
-Source0:	http://download.gnome.org/sources/libsocialweb/0.25/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libsocialweb/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libsocialweb-0.25.20-linkage.patch
 Patch1:		libsocialweb-0.25.21-strfmt.patch
 
@@ -36,15 +40,29 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %package -n %{libname}
 Summary:	A personal social data server -- Library for Services
-License:	LGPLv2.1
 Group:		System/Libraries
 
 %description -n %{libname}
 This package contains libraries used by libsocialweb services.
 
+%package -n %{libkeyfob}
+Summary:	A personal social data server -- Library for Services
+Group:		System/Libraries
+Conflicts:	%{_lib}socialweb0 < 0.25.21-2
+
+%description -n %{libkeyfob}
+This package contains libraries used by libsocialweb services.
+
+%package -n %{libkeystore}
+Summary:	A personal social data server -- Library for Services
+Group:		System/Libraries
+Conflicts:	%{_lib}socialweb0 < 0.25.21-2
+
+%description -n %{libkeystore}
+This package contains libraries used by libsocialweb services.
+
 %package -n %{libclient}
 Summary:	A personal social data server -- Client Library
-License:	LGPLv2.1
 Group:		System/Libraries
 
 %description -n %{libclient}
@@ -54,29 +72,29 @@ libsocialweb features.
 %package -n %{girclient}
 Summary:	GObject Introspection interface description for %{name}-client
 Group:		System/Libraries
-Requires:	%{libclient} = %{version}-%{release}
 
 %description -n %{girclient}
 GObject Introspection interface description for %{name}-client.
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	A personal social data server -- Development Files
-License:	LGPLv2.1
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libkeyfob} = %{version}-%{release}
+Requires:	%{libkeystore} = %{version}-%{release}
 Requires:	%{libclient} = %{version}-%{release}
+Requires:	%{girclient} = %{version}-%{release}
 
-%description -n %{develname}
+%description -n %{devname}
 Libsocialweb is a personal social data server, that can interact with
 social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p0
+%apply_patches
+autoreconf -fi
 
 %build
-autoreconf -fi
 %configure2_5x \
 	--disable-static \
 	--with-gnome \
@@ -137,23 +155,27 @@ mkdir %{buildroot}%{_datadir}/libsocialweb/keys
 
 %files -n %{libname}
 %{_libdir}/libsocialweb.so.%{major}*
+
+%files -n %{libkeyfob}
 %{_libdir}/libsocialweb-keyfob.so.%{major}*
+
+%files -n %{libkeystore}
 %{_libdir}/libsocialweb-keystore.so.%{major}*
 
 %files -n %{libclient}
 %{_libdir}/libsocialweb-client.so.%{client_major}*
 
 %files -n %{girclient}
-%{_libdir}/girepository-1.0/SocialWebClient-0.25.typelib
+%{_libdir}/girepository-1.0/SocialWebClient-%{gimajor}.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %{_libdir}/*.so
 %{_includedir}/libsocialweb/
 %{_libdir}/pkgconfig/libsocialweb-client.pc
 %{_libdir}/pkgconfig/libsocialweb-keyfob.pc
 %{_libdir}/pkgconfig/libsocialweb-keystore.pc
 %{_libdir}/pkgconfig/libsocialweb-module.pc
-%{_datadir}/gir-1.0/SocialWebClient-0.25.gir
+%{_datadir}/gir-1.0/SocialWebClient-%{gimajor}.gir
 %dir %{_datadir}/vala
 %dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/*.deps
@@ -161,21 +183,4 @@ mkdir %{buildroot}%{_datadir}/libsocialweb/keys
 %doc %{_datadir}/gtk-doc/html/libsocialweb/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-dbus/
 %doc %{_datadir}/gtk-doc/html/libsocialweb-client/
-
-
-
-%changelog
-* Fri Dec 09 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.25.20-2
-+ Revision: 739236
-- vala-tools needed
-- rebuild
-- enabling vala build needed for folks
-
-* Wed Dec 07 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.25.20-1
-+ Revision: 738746
-- imported package libsocialweb
-
-  + Claudio Matsuoka <claudio@mandriva.com>
-    - update configure macro
-    - imported package libsocialweb
 
