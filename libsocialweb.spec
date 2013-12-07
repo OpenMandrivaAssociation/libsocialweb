@@ -13,7 +13,7 @@
 Summary:	A personal social data server
 Name:		libsocialweb
 Version:	0.25.21
-Release:	5
+Release:	6
 License:	LGPLv2.1
 Group:		System/Libraries
 Url:		http://git.gnome.org/browse/libsocialweb/
