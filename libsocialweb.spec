@@ -34,6 +34,7 @@ BuildRequires:	pkgconfig(libnm-glib)
 BuildRequires:	pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(rest-extras-0.7)
+BuildRequires:	pkgconfig(python2)
 
 %description
 Libsocialweb is a personal social data server, that can interact with
@@ -96,6 +97,8 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 autoreconf -fi
 
 %build
+export PYTHON=%{__python2}
+
 %configure \
 	--disable-static \
 	--with-gnome \
