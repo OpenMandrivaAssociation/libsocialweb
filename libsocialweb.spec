@@ -31,6 +31,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libnm-glib)
+BuildRequires:	pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(rest-extras-0.7)
 
@@ -95,7 +96,7 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--with-gnome \
 	--with-online=networkmanager \
