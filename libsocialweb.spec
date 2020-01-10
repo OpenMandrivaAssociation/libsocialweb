@@ -93,7 +93,7 @@ social web services, like Flickr, Last.fm, Twitter and Vimeo.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 autoreconf -fi
 
 %build
