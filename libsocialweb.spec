@@ -16,7 +16,7 @@ Version:	0.25.21
 Release:	9
 License:	LGPLv2.1
 Group:		System/Libraries
-Url:		http://git.gnome.org/browse/libsocialweb/
+Url:		https://git.gnome.org/browse/libsocialweb/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libsocialweb/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libsocialweb-0.25.20-linkage.patch
 Patch1:		libsocialweb-0.25.21-strfmt.patch
