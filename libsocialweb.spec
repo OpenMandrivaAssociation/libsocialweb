@@ -21,6 +21,11 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/libsocialweb/%{url_ver}/%{name}-
 Patch0:		libsocialweb-0.25.20-linkage.patch
 Patch1:		libsocialweb-0.25.21-strfmt.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	intltool
 BuildRequires:	vala-tools
 BuildRequires:	xsltproc
